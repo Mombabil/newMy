@@ -1,0 +1,19 @@
+{
+  "name": "NewMy — Musculation",
+  "short_name": "NewMy",
+  "description": "Suivi simple de tes séances de musculation.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f8fc",
+  "theme_color": "#f7f8fc",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

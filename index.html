@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f8fc">
+  <meta name="description" content="NewMy — suivi simple de tes séances de musculation.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <title>NewMy — Musculation</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="NewMy accueil"><span class="brand-mark">N</span><span>New<span class="brand-soft">My</span></span></a>
+      <div class="top-actions">
+        <span class="local-pill"><i></i> Hors ligne prêt</span>
+        <button class="icon-btn" id="installBtn" hidden aria-label="Installer l'application" title="Installer"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v3h16v-3"/></svg></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="view active" id="view-home">
+        <div class="welcome-row">
+          <div><p class="eyebrow" id="todayLabel">TON ESPACE</p><h1>On progresse,<br><span class="muted-heading">séance après séance.</span></h1></div>
+          <div class="avatar">NM</div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-top"><div><span class="card-kicker">OBJECTIF HEBDOMADAIRE</span><div class="week-count"><strong id="weekCount">0</strong><span>/ 3 séances</span></div></div><div class="ring" id="weekRing"><div><strong id="weekPercent">0%</strong><small>objectif</small></div></div></div>
+          <div class="progress-track"><span id="weekBar"></span></div>
+          <div class="week-foot"><span id="weekMessage">Chaque séance compte.</span><span id="weekRemaining">3 à faire</span></div>
+        </div>
+
+        <div class="section-heading"><div><p class="eyebrow">REPRENDRE LE RYTHME</p><h2>Nouvelle séance</h2></div><span class="subtle">Programme alterné</span></div>
+        <div class="program-grid">
+          <button class="program-card program-a" data-start="A"><span class="program-letter">A</span><span class="program-info"><strong>Full body A</strong><small>Développé · Dos · Jambes</small></span><span class="arrow">↗</span></button>
+          <button class="program-card program-b" data-start="B"><span class="program-letter">B</span><span class="program-info"><strong>Full body B</strong><small>Pecs · Dos · Jambes</small></span><span class="arrow">↗</span></button>
+        </div>
+
+        <div class="section-heading compact-heading"><div><p class="eyebrow">TON ACTIVITÉ</p><h2>En un coup d'œil</h2></div><button class="text-btn" data-nav="history">Tout voir</button></div>
+        <div class="stats-grid">
+          <article class="stat-card"><span class="stat-icon purple">↗</span><strong id="totalSessions">0</strong><small>Séances enregistrées</small></article>
+          <article class="stat-card"><span class="stat-icon blue">▤</span><strong id="totalVolume">0 <em>kg</em></strong><small>Volume total soulevé</small></article>
+        </div>
+        <div class="last-session" id="lastSessionBox"><div class="empty-mini"><span>✦</span><div><strong>Ton historique commence ici</strong><small>Enregistre ta première séance pour voir tes progrès.</small></div></div></div>
+      </section>
+
+      <section class="view" id="view-workout">
+        <div class="page-head"><button class="back-btn" data-nav="home">←</button><div><p class="eyebrow">ENTRAÎNEMENT</p><h1 id="workoutTitle">Séance A</h1></div><span class="workout-date" id="workoutDate"></span></div>
+        <div class="workout-summary"><div><strong id="exerciseCount">6 exercices</strong><small>À ton rythme, avec une exécution propre.</small></div><span class="timer-chip">● En cours</span></div>
+        <div id="exerciseList" class="exercise-list"></div>
+        <div class="finish-area"><p id="workoutProgress">0 série validée</p><button class="primary-btn" id="finishBtn">Terminer et enregistrer <span>→</span></button><button class="cancel-link" id="cancelWorkout">Abandonner cette séance</button></div>
+      </section>
+
+      <section class="view" id="view-history">
+        <div class="page-head"><div><p class="eyebrow">RÉGULARITÉ</p><h1>Historique</h1><p class="page-subtitle">Toutes tes séances, au même endroit.</p></div></div>
+        <div class="history-summary" id="historySummary"></div>
+        <div id="historyList" class="history-list"></div>
+      </section>
+
+      <section class="view" id="view-progress">
+        <div class="page-head"><div><p class="eyebrow">TES EFFORTS PORTENT LEURS FRUITS</p><h1>Progression</h1><p class="page-subtitle">Observe tes charges au fil du temps.</p></div></div>
+        <div class="panel">
+          <label class="field-label" for="progressExercise">Exercice à suivre</label>
+          <select id="progressExercise"></select>
+          <div class="progress-highlight"><div><small>DERNIÈRE CHARGE SAISIE</small><strong id="latestWeight">—</strong></div><div><small>MEILLEURE CHARGE</small><strong id="bestWeight">—</strong></div></div>
+          <div class="chart-wrap"><div class="chart-title"><strong>Évolution des charges</strong><span>kg · série la plus lourde par séance</span></div><div id="progressChart" class="bar-chart"></div></div>
+          <p class="chart-note" id="progressNote">Enregistre quelques séances pour afficher ta courbe.</p>
+        </div>
+        <div class="tip-card"><span>✦</span><div><strong>Petit rappel</strong><p>Une progression, ce n'est pas seulement ajouter du poids. Une meilleure technique et des répétitions maîtrisées comptent aussi.</p></div></div>
+      </section>
+
+      <section class="view" id="view-settings">
+        <div class="page-head"><div><p class="eyebrow">PERSONNALISATION</p><h1>Réglages</h1><p class="page-subtitle">NewMy reste simple et tes données restent à toi.</p></div></div>
+        <div class="panel settings-panel">
+          <div class="setting-row"><div><strong>Objectif hebdomadaire</strong><small>Nombre de séances par semaine</small></div><div class="stepper"><button id="goalMinus" aria-label="Diminuer">−</button><strong id="goalValue">3</strong><button id="goalPlus" aria-label="Augmenter">+</button></div></div>
+          <div class="setting-divider"></div>
+          <div class="setting-row"><div><strong>Unité de poids</strong><small>Utilisée dans les séances</small></div><span class="unit-badge">Kilogrammes (kg)</span></div>
+        </div>
+        <div class="panel data-panel"><div><p class="eyebrow">TES DONNÉES</p><h3>Sauvegarde & restauration</h3><p>Les séances sont enregistrées dans le stockage de ce navigateur. Exporte régulièrement une copie pour ne rien perdre.</p></div><div class="data-actions"><button class="secondary-btn" id="exportBtn">↓ Exporter mes données</button><label class="secondary-btn upload-btn">↑ Importer une sauvegarde<input type="file" id="importFile" accept="application/json,.json" hidden></label></div><p class="data-status" id="dataStatus" role="status"></p></div>
+        <div class="about"><span class="brand-mark small-mark">N</span><div><strong>NewMy <span class="version">VERSION 1.0</span></strong><small>Simplement régulier. Progressivement plus fort.</small></div></div>
+        <p class="privacy-note">Aucune création de compte. Aucune synchronisation automatique. Les données restent sur cet appareil et dans ce navigateur.</p>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Navigation principale">
+      <button class="nav-item active" data-nav="home"><span>⌂</span><small>Accueil</small></button>
+      <button class="nav-item" data-nav="history"><span>▤</span><small>Historique</small></button>
+      <button class="nav-item" data-nav="progress"><span>↗</span><small>Progrès</small></button>
+      <button class="nav-item" data-nav="settings"><span>⚙</span><small>Réglages</small></button>
+    </nav>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
